@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  workflow_dispatch: # allows manual triggering
+    inputs:
+      create_release:
+        description: 'Create new release'
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Windows 10 SDK
+        uses: GuillaumeFalourd/setup-windows10-sdk-action@v2
+        with:
+          sdk-version: 22621
+      - name: Install Python 3.11.7
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.7'
+      - name: Run build script
+        run: |
+          python build.py --github-actions
+      - name: Release LunaTranslator
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.create_release }}
+          release_name: ${{ github.event.inputs.create_release }}
+          overwrite: true
+          files: ALL.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
