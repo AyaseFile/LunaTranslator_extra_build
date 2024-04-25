@@ -29,7 +29,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.create_release }}
-          release_name: ${{ github.event.inputs.create_release }}
           overwrite: true
           files: ALL.zip
         env:
