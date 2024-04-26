@@ -258,8 +258,3 @@ if __name__ == "__main__":
     
     os.chdir(rootDir)
     os.system(rf'"C:\Program Files\7-Zip\7z.exe" a -m0=LZMA -mx9 .\\ALL.zip .\\ALL')
-
-    subprocess.run(f"curl -LO https://github.com/tcnksm/ghr/releases/download/v0.16.2/ghr_v0.16.2_windows_amd64.zip")
-    subprocess.run(f"7z x ghr_v0.16.2_windows_amd64.zip")
-    subprocess.run(f'ghr_v0.16.2_windows_amd64/ghr -u HIllya51 -r LunaTranslator_extra_build -replace common ALL.zip')
-          
