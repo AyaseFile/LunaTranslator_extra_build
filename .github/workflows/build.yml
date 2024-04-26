@@ -24,7 +24,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event.inputs.create_release }}
+          tag_name: common
           files: |
             ALL.zip
         env:
