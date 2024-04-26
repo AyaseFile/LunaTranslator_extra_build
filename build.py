@@ -261,5 +261,5 @@ if __name__ == "__main__":
 
     subprocess.run(f"curl -LO https://github.com/tcnksm/ghr/releases/download/v0.16.2/ghr_v0.16.2_windows_amd64.zip")
     subprocess.run(f"7z x ghr_v0.16.2_windows_amd64.zip")
-    subprocess.run(f'ghr_v0.16.2_windows_amd6/ghr -u Vita3K -r Vita3K -recreate -n common')
+    subprocess.run(f'ghr_v0.16.2_windows_amd64/ghr -u Vita3K -r Vita3K -recreate -n common')
           
