@@ -3,35 +3,13 @@ import os
 import shutil
 import subprocess
 
-py37Path32 = os.path.join(
-    os.environ["LOCALAPPDATA"], "Programs\\Python\\Python37-32\\python.exe"
-)
-py37Path64 = os.path.join(
-    os.environ["LOCALAPPDATA"], "Programs\\Python\\Python37\\python.exe"
-)
-py311Path = os.path.join(
-    os.environ["LOCALAPPDATA"], "Programs\\Python\\Python311\\python.exe"
-)
 msbuildPath = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\MSBuild.exe"
 vcvars32Path = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Auxiliary\\Build\\vcvars32.bat"
 vcvars64Path = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Auxiliary\\Build\\vcvars64.bat"
 
-pluginDirs = ["DLL32", "DLL64", "Locale_Remulator", "LunaHook", "Magpie", "NTLEAS"]
 
 vcltlFile = "https://github.com/Chuyu-Team/VC-LTL5/releases/download/v5.0.9/VC-LTL-5.0.9-Binary.7z"
 vcltlFileName = "VC-LTL-5.0.9-Binary.7z"
-brotliFile32 = "https://github.com/google/brotli/releases/latest/download/brotli-x86-windows-dynamic.zip"
-brotliFileName32 = "brotli-x86-windows-dynamic.zip"
-brotliFile64 = "https://github.com/google/brotli/releases/latest/download/brotli-x64-windows-dynamic.zip"
-brotliFileName64 = "brotli-x64-windows-dynamic.zip"
-localeEmulatorFile = "https://github.com/xupefei/Locale-Emulator/releases/download/v2.5.0.1/Locale.Emulator.2.5.0.1.zip"
-localeEmulatorFileName = "Locale.Emulator.2.5.0.1.zip"
-ntleaFile = "https://github.com/zxyacb/ntlea/releases/download/0.46/ntleas046_x64.7z"
-ntleaFileName = "ntleas046_x64.7z"
-curlFile32 = "https://curl.se/windows/dl-8.7.1_7/curl-8.7.1_7-win32-mingw.zip"
-curlFileName32 = "curl-8.7.1_7-win32-mingw.zip"
-curlFile64 = "https://curl.se/windows/dl-8.7.1_7/curl-8.7.1_7-win64-mingw.zip"
-curlFileName64 = "curl-8.7.1_7-win64-mingw.zip"
 onnxruntimeFile = "https://github.com/RapidAI/OnnxruntimeBuilder/releases/download/1.14.1/onnxruntime-1.14.1-vs2019-static-mt.7z"
 onnxruntimeFileName = "onnxruntime-1.14.1-vs2019-static-mt.7z"
 opencvFile = "https://github.com/RapidAI/OpenCVBuilder/releases/download/4.7.0/opencv-4.7.0-windows-vs2019-mt.7z"
@@ -40,12 +18,8 @@ opencvFileName = "opencv-4.7.0-windows-vs2019-mt.7z"
 mecabUrl = "https://github.com/HIllya51/mecab.git"
 webviewUrl = "https://github.com/HIllya51/webview.git"
 localeRemulatorUrl = "https://github.com/HIllya51/Locale_Remulator.git"
-lunaHookUrl = "https://github.com/HIllya51/LunaHook.git"
 magpieUrl = "https://github.com/HIllya51/Magpie_CLI.git"
 lunaOCRUrl = "https://github.com/HIllya51/LunaOCR.git"
-
-ocrModelUrl = "https://github.com/HIllya51/RESOURCES/releases/download/ocr_models"
-availableLocales = ["cht", "en", "ja", "ko", "ru", "zh"]
 
 
 rootDir = os.path.dirname(__file__)
@@ -184,11 +158,6 @@ def buildMagpie():
     shutil.move("publish/x64/effects", f"{rootDir}/ALL/Magpie")
 
 
-def installDependencies():
-    os.chdir(rootDir)
-    subprocess.run(f"{py311Path} -m pip install --upgrade pip")
-    subprocess.run(f"{py311Path} -m pip install conan cmake pefile")
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -241,11 +210,7 @@ if __name__ == "__main__":
         os.mkdir("temp")
 
 
-    if args.github_actions:
-        py311Path = "C:\\hostedtoolcache\\windows\\Python\\3.11.7\\x64\\python.exe"
 
-    if not args.skip_python_dependencies:
-        installDependencies()
     if not args.skip_build:
         if not args.skip_vc_ltl:
             installVCLTL()

@@ -13,14 +13,17 @@ jobs:
         uses: GuillaumeFalourd/setup-windows10-sdk-action@v2
         with:
           sdk-version: 22621
-      - name: Install Python 3.11.7
+      - name: Install Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11.7'
+          python-version: '3.11'
           architecture: x64
-      - name: Run build script
+      - name: pip install
         run: |
-          python build.py --github-actions
+          pip install --upgrade pip
+          pip install conan cmake pefile
+      - name: Run build script
+        run: python build.py --github-actions
       - uses: actions/upload-artifact@v4
         with:
           name: ALL
